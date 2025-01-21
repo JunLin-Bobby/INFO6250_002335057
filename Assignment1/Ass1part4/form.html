@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Assigment Part3.1</title>
+        <link rel="stylesheet" href="./style.css">
+
+    </head>
+    
+    <body>
+    <div class="form-container">
+        <form action="process" method="post" enctype="multipart/form-data">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+
+            <label for="upload">Upload Your Picture:</label>
+            <input type="file" id="upload" name="upload" accept="image/*" required>
+            
+            <label for="gender">Gender:</label>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male" style="display: inline;">Male</label>
+            <input type="radio" id="female" name="gender" value="feale">
+            <label for="female" style="display: inline;">Female</label>
+
+            <label for="country">Select Country</label>
+            <select id="country" name="country">
+                <option value="uk">United Kingdom</option>
+                <option value="us">United States</option>
+                <option value="in">India</option>
+                <option value="cn">China</option>
+            </select>
+            <input type="checkbox" id = "country">
+
+            <label for="hobby">Hobby:</label>
+            <input type="checkbox" id ="cricket" name="hobby" value="cricket">
+            <label for="cricket" style="display: inline;">Cricket</label>
+            <input type="checkbox" id ="football" name="hobby" value="football">
+            <label for="football" style="display: inline;">Football</label>
+
+            <label for="address">Address</label>
+            <textarea id = address name="address" rows="4"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>   
+        
+    </body>
+
+</html>

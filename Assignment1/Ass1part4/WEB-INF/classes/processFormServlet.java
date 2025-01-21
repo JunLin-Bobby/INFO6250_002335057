@@ -4,7 +4,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Part;
 import java.io.File;
-
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,14 +24,19 @@ public class processFormServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String confirmPassword = request.getParameter("confirm-password");
-        String gender = request.getParameter("gender");
-        String country = request.getParameter("country");
-        String[] hobbies = request.getParameterValues("hobby");
-        String address = request.getParameter("address");
 
+        // String email = request.getParameter("email");
+        // String password = request.getParameter("password");
+        // String confirmPassword = request.getParameter("confirm-password");
+        // String gender = request.getParameter("gender");
+        // String country = request.getParameter("country");
+        // String[] hobbies = request.getParameterValues("hobby");
+        // String address = request.getParameter("address");
+
+        //Using getParamemterNames to obtain data from form
+        
+
+        //process the upload photo
         Part filePart = request.getPart("upload"); 
         if (filePart == null) {
          throw new ServletException("File part is missing in the request.");
@@ -43,35 +48,36 @@ public class processFormServlet extends HttpServlet{
         if (!uploadDir.exists()) {
             uploadDir.mkdir(); 
         }
-
-        
         String filePath = uploadPath + File.separator + fileName;
         filePart.write(filePath);
+        ////////////////////////////////////////////////
 
+        //bluid html
         PrintWriter out = resp.getWriter();
         out.println("<html>");
-
         out.println("<body>");
-        out.println("<h1>Submitted Information</h1>");
-        out.println("<p><strong>Email:</strong> " + email + "</p>");
-        out.println("<p><strong>Password:</strong> " + password + "</p>");
-        out.println("<p><strong>Confirm Password:</strong> " + confirmPassword + "</p>");
-       out.println("<p><strong>Uploaded File:</strong> " + fileName + "</p>");
-       out.println("<img src='" + UPLOAD_DIR + "/" + fileName + "' alt='Uploaded Image' style='max-width: 300px; max-height: 300px;'>");
-        out.println("<p><strong>Gender:</strong> " + (gender != null ? gender : "Not selected") + "</p>");
-        out.println("<p><strong>Country:</strong> " + country + "</p>");
+        //using getParameterNames();
+        Enumeration<String> parameterNames = request.getParameterNames();
+        while(parameterNames.hasMoreElements()){
+            String parameterName = parameterNames.nextElement();
+            String[] parameterValues = request.getParameterValues(parameterName);
 
-         out.println("<p><strong>Hobby:</strong> ");
-         if(hobbies!=null){
-            for (String hobby: hobbies){
-                  out.println( hobby+" " );
+            out.println("<p>"+parameterName+":");
+            for(String value : parameterValues){
+                out.println(value+" ");
             }
-         }
-         out.println("</p>");
+            out.println("</p>");
+        }
+        //printlin the upload photo
+        if(filePart!=null){
+            out.println("<p><strong>Uploaded File:</strong> " + fileName + "</p>");
+            out.println("<img src='" + UPLOAD_DIR + "/" + fileName + "' alt='Uploaded Image' style='max-width: 300px; max-height: 300px;'>");
+        }else{
+             out.println("<p><strong>Uploaded File:</strong> No file uploaded</p>");
+        }
+        
 
-        out.println("<p><strong>Address:</strong> " + address + "</p>");
         out.println("</body>");
-
         out.println("</html>");
     }
 

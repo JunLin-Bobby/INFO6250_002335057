@@ -4,7 +4,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Part;
 import java.io.File;
-
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,14 +24,19 @@ public class processFormServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String confirmPassword = request.getParameter("confirm-password");
-        String gender = request.getParameter("gender");
-        String country = request.getParameter("country");
-        String[] hobbies = request.getParameterValues("hobby");
-        String address = request.getParameter("address");
 
+        // String email = request.getParameter("email");
+        // String password = request.getParameter("password");
+        // String confirmPassword = request.getParameter("confirm-password");
+        // String gender = request.getParameter("gender");
+        // String country = request.getParameter("country");
+        // String[] hobbies = request.getParameterValues("hobby");
+        // String address = request.getParameter("address");
+
+        //Using getParamemterMap to obtain data from form
+        Map<String,String[]> parameterMap = request.getParameterMap();
+
+        //process the upload photo
         Part filePart = request.getPart("upload"); 
         if (filePart == null) {
          throw new ServletException("File part is missing in the request.");
@@ -43,35 +48,31 @@ public class processFormServlet extends HttpServlet{
         if (!uploadDir.exists()) {
             uploadDir.mkdir(); 
         }
-
-        
         String filePath = uploadPath + File.separator + fileName;
         filePart.write(filePath);
 
+        //bluid html
         PrintWriter out = resp.getWriter();
         out.println("<html>");
-
         out.println("<body>");
-        out.println("<h1>Submitted Information</h1>");
-        out.println("<p><strong>Email:</strong> " + email + "</p>");
-        out.println("<p><strong>Password:</strong> " + password + "</p>");
-        out.println("<p><strong>Confirm Password:</strong> " + confirmPassword + "</p>");
-       out.println("<p><strong>Uploaded File:</strong> " + fileName + "</p>");
-       out.println("<img src='" + UPLOAD_DIR + "/" + fileName + "' alt='Uploaded Image' style='max-width: 300px; max-height: 300px;'>");
-        out.println("<p><strong>Gender:</strong> " + (gender != null ? gender : "Not selected") + "</p>");
-        out.println("<p><strong>Country:</strong> " + country + "</p>");
+       for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+            String key = entry.getKey();
+            String[] values = entry.getValue();
 
-         out.println("<p><strong>Hobby:</strong> ");
-         if(hobbies!=null){
-            for (String hobby: hobbies){
-                  out.println( hobby+" " );
+            // continue if when processing the upload photo
+            if ("upload".equals(key)) continue;
+
+            out.println("<p><strong>" + key + ":</strong> ");
+            for (String value : values) {
+                out.println(value + " ");
             }
-         }
-         out.println("</p>");
+            out.println("</p>");
+        }
+        //printlin the upload photo
+        out.println("<p><strong>Uploaded File:</strong> " + fileName + "</p>");
+        out.println("<img src='" + UPLOAD_DIR + "/" + fileName + "' alt='Uploaded Image' style='max-width: 300px; max-height: 300px;'>");
 
-        out.println("<p><strong>Address:</strong> " + address + "</p>");
         out.println("</body>");
-
         out.println("</html>");
     }
 

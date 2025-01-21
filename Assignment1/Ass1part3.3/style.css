@@ -1,0 +1,12 @@
+.form-container label {
+    display: block;
+    margin: 10px 0 5px;
+} */
+.form-container input,
+.form-container select,
+.form-container input[type="radio"],
+.form-container input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+        }
+    
