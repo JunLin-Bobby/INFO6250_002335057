@@ -4,17 +4,15 @@
                              http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
-   
-
     <servlet>
-        <servlet-name>TuitionWaiver</servlet-name>
-        <servlet-class>TuitionWaiverServlet</servlet-class>
+        <servlet-name>ShowServletMethods</servlet-name>
+        <servlet-class>ShowServletMethods</servlet-class>
     </servlet>
 
-   
+
 
     <servlet-mapping>
-        <servlet-name>TuitionWaiver</servlet-name>
-        <url-pattern>/process</url-pattern>
+        <servlet-name>ShowServletMethods</servlet-name>
+        <url-pattern>/showServletMethods</url-pattern>
     </servlet-mapping>
 </web-app>

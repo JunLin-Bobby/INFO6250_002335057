@@ -1,12 +1,47 @@
-.form-container label {
-    display: block;
-    margin: 10px 0 5px;
-} */
-.form-container input,
-.form-container select,
-.form-container input[type="radio"],
-.form-container input[type="checkbox"] {
-    width: auto;
-    margin-right: 5px;
-        }
-    
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    line-height: 1.6;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+   
+}
+p.introduction {
+    border: 2px solid black;
+    padding:10px;
+}
+p {
+    text-align: justify;
+}
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+h1{
+    font-size:25px;
+}
+h2{
+    color: red;
+}
+.header {
+    font-size: 28px;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 5px;
+}
+input {
+    margin-right: 3px; /* Add small margin between input and next label */
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    margin-bottom: 10px;
+}
