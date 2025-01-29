@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+   <body>
+    <h2>Please Log in to View Excel Content</h2>
+    <form action="j_security_check" method="POST">
+<!--    My Setting on tomcat-users.xml    
+    <tomcat-users>
+    <role rolename="admin"/>
+    <user username="admin" password="0000" roles="admin"/>
+</tomcat-users>-->
+        <label>User Name: <input type="text" name="j_username"></label><br><br>
+        <label>Password: <input type="password" name="j_password"></label><br><br>
+        <input type="submit" value="Login">
+    </form>
+
+</body>
+
+</html>
