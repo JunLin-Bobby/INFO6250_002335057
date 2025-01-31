@@ -43,7 +43,7 @@
     <!-- Item List -->
     <div style="margin-left: 220px;">
         <h3>Available <%= category.substring(0, 1).toUpperCase() + category.substring(1) %></h3>
-        
+        <h1>sessionID:<%=session.getId()%></h1>
         <form action="shoppingcartservlet" method="post">
              <input type="hidden" name="action" value="add">
             <%

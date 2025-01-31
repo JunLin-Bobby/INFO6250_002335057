@@ -44,11 +44,11 @@ public class ShoppingCartServlet extends HttpServlet {
             cart = new ArrayList<>();
                 }
             
-        // 判斷請求類型 (新增商品 or 移除商品)
+        // add or remove Item
         String action = request.getParameter("action");
 
         if ("add".equals(action)) {
-            // 取得選擇的商品
+            // add chosen item
             String[] selectedProducts = request.getParameterValues("product");
             if (selectedProducts != null) {
                 for (String product : selectedProducts) {
@@ -56,7 +56,7 @@ public class ShoppingCartServlet extends HttpServlet {
                 }
             }
         } else if ("remove".equals(action)) {
-            // 移除商品
+            // remove Item
             String removeItem = request.getParameter("remove");
             if (removeItem != null) {
                
@@ -64,10 +64,10 @@ public class ShoppingCartServlet extends HttpServlet {
             }
         }
 
-        // 更新 Session
+        //  Session update
         session.setAttribute("cart", cart);
 
-        // 導向購物車頁面
+       
         response.sendRedirect("cart.jsp");
             
             
