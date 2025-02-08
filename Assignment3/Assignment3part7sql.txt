@@ -1,0 +1,14 @@
+CREATE DATABASE testdb;
+
+use testdb;
+
+
+CREATE TABLE books (
+    isbn VARCHAR(12) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    price FLOAT NOT NULL
+);
+
+INSERT INTO books (isbn, title, author, price) 
+VALUES ('123456789012', 'Effective Java', 'Joshua Bloch', 45.99);

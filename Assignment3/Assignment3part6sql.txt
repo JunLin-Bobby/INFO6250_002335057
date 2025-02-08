@@ -1,0 +1,16 @@
+CREATE DATABASE testdb;
+
+use testdb;
+
+
+CREATE TABLE moviespart6 (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    actor VARCHAR(255) NOT NULL,
+    actress VARCHAR(255) NOT NULL,
+    genre VARCHAR(100) NOT NULL,
+    year INT NOT NULL
+);
+
+INSERT INTO moviespart6 (title, actor, actress, genre, year) 
+VALUES ('Test Movie', 'Test Actor', 'Test Actress', 'Drama', 2024);
